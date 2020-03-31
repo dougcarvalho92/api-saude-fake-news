@@ -15,11 +15,15 @@ app.get('/fakes', (require, response) => {
         const fakes = [];
         const $ = cheerio.load(res.data)
         $(".tileContent").each((index, element) => {
-            let title = $(element).children('h2').first().text();
+            let title = $(element).children('h2').first().text().trim();
             let link  = path + $(element).children('h2').children('a').attr('href');
-            let description = $(element).children('.description').text();
+            let description = $(element).children('.description').text().trim();
             let image = path + $(element).find('img').attr('src');
-            fakes.push({ title, description, image , link});
+            let tag = $(element).find('.tag-848').text().trim();
+            if(tag == "Novo Coronavírus Fake News"){
+                fakes.push({ title, description, image , link, tag});
+            }
+           
         });
         response.json(fakes);
     });
