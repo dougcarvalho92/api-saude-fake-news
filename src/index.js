@@ -17,7 +17,7 @@ app.get('/fakes', (require, response) => {
         $(".tileContent").each((index, element) => {
             let title = $(element).children('h2').first().text().trim();
             if (title.includes("VERDADE")) {
-                var category = "É VERDDADE";
+                var category = "É VERDADE";
             } else {
                 var category = "É FAKE";
             }
