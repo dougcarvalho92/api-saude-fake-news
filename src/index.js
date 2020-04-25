@@ -11,28 +11,6 @@ app.use(express.json()); // PERMITIR QUE ENVIA DADOS EM JSON PARA APLICAÇÃO
 
 app.get('/fato-ou-fake', async (require, response) => {
     const fakes = [];
-    // ============GLOBO============
-    const url_globo = "https://g1.globo.com/fato-ou-fake";
-    await axios.get(url_globo).then((res) => {
-        const $ = cheerio.load(res.data)
-
-        $(".feed-post-body").each((index, element) => {
-            let title = $(element).find('.feed-post-link').text().trim();
-            if (title.includes("É #FAKE")) {
-                var category = "É #FAKE";
-            } else {
-                var category = "É VERDADE";
-            }
-            let link = $(element).find('.feed-post-link').attr('href');
-            let description = $(element).find('.feed-post-body-resumo').text().trim();
-            let image = $(element).find('img').attr('src');
-            let origin = "G1";
-            if (title.includes('coronavírus')) {
-                fakes.push({ title, link, description, image, category, origin });
-            }
-        });
-
-    });
     // ============MINISTÉRIO DA SAÚDE============
     const url_ministerio_da_saude = "https://www.saude.gov.br/fakenews?limit=0";
     const path = "https://www.saude.gov.br";
